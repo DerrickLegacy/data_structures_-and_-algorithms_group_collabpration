@@ -23,11 +23,9 @@ public class Update {
                 }
             }
         }
-
         for (int i = 0; i < arrCopy.length; i++) {
             System.out.println(arrCopy[i]);
         }
-
         // Deleting an array
         arr = null;
     }
