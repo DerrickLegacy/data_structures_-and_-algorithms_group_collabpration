@@ -1,8 +1,7 @@
 public class BubbleSort {
 
-    
-     public static void main(String[] args) {
-        int[] arr = {5, 1, 4, 2, 8};
+    public static void main(String[] args) {
+        int[] arr = { 5, 1, 4, 2, 8 };
         int n = arr.length;
 
         // Outer loop to control the number of passes
@@ -12,7 +11,7 @@ public class BubbleSort {
                 // Compare adjacent elements
                 if (arr[j] > arr[j + 1]) {
                     // Swap elements
-                    int temp = arr[j];
+                    int temp = arr[j]; 
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
                 }
@@ -23,8 +22,5 @@ public class BubbleSort {
         for (int element : arr) {
             System.out.print(element + " ");
         }
-        }
     }
-    
-    
-
+}
