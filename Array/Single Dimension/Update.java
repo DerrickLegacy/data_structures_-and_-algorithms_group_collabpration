@@ -1,7 +1,7 @@
 public class Update {
     public static void main(String[] args) {
         // inputs
-        int [] arr = { 1, 2, 3, 4, 5, 78, 756, 29 };
+        int[] arr = { 1, 2, 3, 4, 5, 78, 756, 29 };
 
         int sizeOfArry = arr.length;
 
