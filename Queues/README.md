@@ -133,8 +133,7 @@ Here, if the array is empty, we get the corresponding message. If the front has 
 For display:
 
 void display(){
-      int i;
-     
+      int i;     
       if(isEmpty()){
           System.out.println("Queue is empty");
       } else {
