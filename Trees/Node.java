@@ -6,6 +6,7 @@ public class Node {
 
     public Node(int item) {
         key = item;
-        left = right = null;
+        left = null;
+        right = null;
     }
 }
