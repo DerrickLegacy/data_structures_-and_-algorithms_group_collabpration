@@ -10,7 +10,7 @@ class Person {
 
 public class HashTable {
     private static final int TABLE_SIZE = 10;
-    private static Person[][] hashTable = new Person[TABLE_SIZE][];
+    private static Person[] hashTable = new Person[TABLE_SIZE];
 
     private static int hash(String name) {
         int length = 0;
@@ -23,18 +23,16 @@ public class HashTable {
 
     private static void initHashTable() {
         for (int i = 0; i < TABLE_SIZE; i++) {
-            hashTable[i] = new Person[0];
+            hashTable[i] = null; // Initialize to null
         }
     }
 
     private static void printTable() {
         for (int i = 0; i < TABLE_SIZE; i++) {
-            if (hashTable[i].length == 0) {
+            if (hashTable[i] == null) {
                 System.out.printf("\t%d\t---\n", i);
             } else {
-                for (Person person : hashTable[i]) {
-                    System.out.printf("\t%d\t%s\t%d\n", i, person.name, person.age);
-                }
+                System.out.printf("\t%d\t%s\t%d\n", i, hashTable[i].name, hashTable[i].age);
             }
         }
     }
@@ -45,43 +43,26 @@ public class HashTable {
 
         int index = hash(p.name);
 
-        for (Person person : hashTable[index]) {
-            if (person.name.equals(p.name)) {
-                return false; // Already exists, cannot insert
-            }
+        if (hashTable[index] != null && p.name.equals(hashTable[index].name)) {
+            return false; // Already exists, cannot insert
+        } else {
+            hashTable[index] = p;
+            return true;
         }
-
-        Person[] newArray = new Person[hashTable[index].length + 1];
-        System.arraycopy(hashTable[index], 0, newArray, 0, hashTable[index].length);
-        newArray[hashTable[index].length] = p;
-        hashTable[index] = newArray;
-        return true;
     }
 
     private static Person hashTableLookup(String name) {
         int index = hash(name);
-
-        for (Person person : hashTable[index]) {
-            if (person.name.equals(name)) {
-                return person;
-            }
-        }
-
-        return null; // Not found
+        return (hashTable[index] != null && hashTable[index].name.equals(name)) ? hashTable[index] : null;
     }
 
     private static Person hashTableDelete(String name) {
         int index = hash(name);
 
-        for (int i = 0; i < hashTable[index].length; i++) {
-            if (hashTable[index][i].name.equals(name)) {
-                Person[] newArray = new Person[hashTable[index].length - 1];
-                System.arraycopy(hashTable[index], 0, newArray, 0, i);
-                System.arraycopy(hashTable[index], i + 1, newArray, i, hashTable[index].length - i - 1);
-                Person removedPerson = hashTable[index][i];
-                hashTable[index] = newArray;
-                return removedPerson;
-            }
+        if (hashTable[index] != null && hashTable[index].name.equals(name)) {
+            Person removedPerson = hashTable[index];
+            hashTable[index] = null;
+            return removedPerson;
         }
 
         return null; // Not found
