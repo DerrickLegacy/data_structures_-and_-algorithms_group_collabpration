@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-
 class Person {
     String name;
     int age;
@@ -11,18 +9,15 @@ class Person {
 }
 
 public class HashTable {
-
-    private static final int MAX_NAME = 256;
     private static final int TABLE_SIZE = 10;
-
     private static Person[][] hashTable = new Person[TABLE_SIZE][];
 
     private static int hash(String name) {
-        int length = Math.min(name.length(), MAX_NAME);
-        int hashValue = 0;
-        for (int i = 0; i < length; i++) {
-            hashValue = (hashValue * name.charAt(i) + 21) % TABLE_SIZE;
+        int length = 0;
+        for (int i = 0; i < name.length(); i++) {
+            length += (int) name.charAt(i);
         }
+        int hashValue = ((length + 1234) % TABLE_SIZE);
         return hashValue;
     }
 
@@ -47,12 +42,15 @@ public class HashTable {
     private static boolean hashTableInsert(Person p) {
         if (p == null)
             return false;
+
         int index = hash(p.name);
+
         for (Person person : hashTable[index]) {
             if (person.name.equals(p.name)) {
                 return false; // Already exists, cannot insert
             }
         }
+
         Person[] newArray = new Person[hashTable[index].length + 1];
         System.arraycopy(hashTable[index], 0, newArray, 0, hashTable[index].length);
         newArray[hashTable[index].length] = p;
@@ -62,16 +60,19 @@ public class HashTable {
 
     private static Person hashTableLookup(String name) {
         int index = hash(name);
+
         for (Person person : hashTable[index]) {
             if (person.name.equals(name)) {
                 return person;
             }
         }
+
         return null; // Not found
     }
 
     private static Person hashTableDelete(String name) {
         int index = hash(name);
+
         for (int i = 0; i < hashTable[index].length; i++) {
             if (hashTable[index][i].name.equals(name)) {
                 Person[] newArray = new Person[hashTable[index].length - 1];
@@ -82,6 +83,7 @@ public class HashTable {
                 return removedPerson;
             }
         }
+
         return null; // Not found
     }
 
