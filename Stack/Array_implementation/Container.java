@@ -44,34 +44,34 @@ public class Container {
    }
    public static void main(String args[]){
 
-      Scanner scan = new Scanner(System.in);
+      try (Scanner scan = new Scanner(System.in)) {
+         System.out.println("Enter the number of pies the container can contain");
+         int capacity = scan.nextInt();
 
-      System.out.println("Enter the number of pies the container can contain");
-      int capacity = scan.nextInt();
+         Container con = new Container(capacity);
 
-      Container con = new Container(capacity);
+         System.out.println("How many pies do you want to keep in the container?");
+         int actual_pies = scan.nextInt();
 
-      System.out.println("How many pies do you want to keep in the container?");
-      int actual_pies = scan.nextInt();
-
-      if (actual_pies > capacity){
-         System.out.println("The container can only contain "+ capacity + " pies");
-         
-      }else{
-         int i = 1;
-         while(i <= actual_pies){
-            System.out.println("Enter the pie flavor to be in the container");
-            String pie1 = scan.next();
-            con.push(pie1);
-            i++;
+         if (actual_pies > capacity){
+            System.out.println("The container can only contain "+ capacity + " pies");
+            
+         }else{
+            int i = 1;
+            while(i <= actual_pies){
+               System.out.println("Enter the pie flavor to be in the container");
+               String pie1 = scan.next();
+               con.push(pie1);
+               i++;
+            }
+            con.isFull();
+            con.peek();
+            con.pop();
+            con.pop();
+            con.pop();
+            con.peek();
+            con.isEmpty();
          }
-         con.isFull();
-         con.peek();
-         con.pop();
-         con.pop();
-         con.pop();
-         con.peek();
-         con.isEmpty();
       }
 
       
